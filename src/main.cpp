@@ -54,15 +54,15 @@ void funcionAdelante(bool permitirAdelante){
 
 void funcionGiros(bool permitirAdelante){
   if(!permitirAdelante){
-     DelDer.setVelocity(-Controller1.Axis4.position(),percent);
-   DelIzq.setVelocity(Controller1.Axis4.position(),percent);
-   TraDer.setVelocity(-Controller1.Axis4.position(),percent);
-   TraIzq.setVelocity(Controller1.Axis4.position(),percent);
+     DelDer.setVelocity(-Controller1.Axis1.position(),percent);
+   DelIzq.setVelocity(Controller1.Axis1.position(),percent);
+   TraDer.setVelocity(-Controller1.Axis1.position(),percent);
+   TraIzq.setVelocity(Controller1.Axis1.position(),percent);
 
-  DelDer.spin(forward);
-  DelIzq.spin(forward);
-  TraDer.spin(forward);
-  TraIzq.spin(forward);
+    DelDer.spin(forward);
+    DelIzq.spin(forward);
+    TraDer.spin(forward);
+    TraIzq.spin(forward);
   }
 }
 
@@ -105,16 +105,29 @@ int main() {
     bajarBrazo(velocidadBrazo);
    }
   //Funcion para ir adelante 
-if(Controller1.Axis3.position()){
-  permitirAdelante = true;
-   funcionAdelante(permitirAdelante);
+  while(Controller1.ButtonA.pressing()){
+    apagarMotores();
+  }
 
-}
-if(Controller1.Axis4.position()){
-   permitirAdelante = false;
-   funcionGiros(permitirAdelante);
+  if(Controller1.Axis3.position()){
+    permitirAdelante = true;
+    funcionAdelante(permitirAdelante);
 
-}
+  }
+   
+   if(Controller1.Axis1.position()){
+    permitirAdelante = false;
+    funcionGiros(permitirAdelante);
+  }
+
+  if(Controller1.ButtonA.pressing()){
+    DelDer.setVelocity(0,percent);
+    DelIzq.setVelocity(0,percent);
+    TraDer.setVelocity(0,percent);
+    TraIzq.setVelocity(0, percent);
+  }
+
+
    //funcion para girar
    
    Brazo1.stop();
