@@ -37,6 +37,37 @@ void bajarBrazo(int velocidad){
   Brazo2.spin(forward);
 }
 
+
+void funcionAdelante(bool permitirAdelante){
+  if (permitirAdelante){
+   DelDer.setVelocity(Controller1.Axis3.position(),percent);
+   DelIzq.setVelocity(Controller1.Axis3.position(),percent);
+   TraDer.setVelocity(Controller1.Axis3.position(),percent);
+   TraIzq.setVelocity(Controller1.Axis3.position(),percent);
+
+  DelDer.spin(forward);
+  DelIzq.spin(forward);
+  TraDer.spin(forward);
+  TraIzq.spin(forward);
+  }
+}
+
+void funcionGiros(bool permitirAdelante){
+  if(!permitirAdelante){
+     DelDer.setVelocity(-Controller1.Axis4.position(),percent);
+   DelIzq.setVelocity(Controller1.Axis4.position(),percent);
+   TraDer.setVelocity(-Controller1.Axis4.position(),percent);
+   TraIzq.setVelocity(Controller1.Axis4.position(),percent);
+
+  DelDer.spin(forward);
+  DelIzq.spin(forward);
+  TraDer.spin(forward);
+  TraIzq.spin(forward);
+  }
+}
+
+
+
 void adelanteAtras(){
   
   DelDer.setVelocity(Controller1.Axis3.position(), percent);
@@ -48,68 +79,6 @@ void adelanteAtras(){
   DelIzq.spin(forward);
   TraIzq.spin(forward);
 }
-void otro(){
-    Brain.Screen.clearLine();
-
-    Brain.Screen.print(Controller1.Axis2.position());
-    Brain.Screen.print(Controller1.Axis2.position());
-
-   // DelDer.setVelocity(Controller1.Axis3.position(),percent);
-    DelDer.setVelocity(Controller1.Axis2.position(),percent);
-    TraDer.setVelocity(Controller1.Axis2.position(),percent);
-
-   // DelDer.setVelocity(Controller1.Axis4.position(),percent);
-    //DelDer.spin(forward);
-    DelIzq.spin(forward);
-    DelDer.spin(forward);
-    TraIzq.spin(forward);
-    TraDer.spin(forward);
-}
-
-void izquierda(){
-    Brain.Screen.clearLine();
-
-    Brain.Screen.print(Controller1.Axis4.position());
-    Brain.Screen.print(Controller1.Axis3.position());
-
-   // DelDer.setVelocity(Controller1.Axis3.position(),percent);
-    DelIzq.setVelocity(Controller1.Axis3.position(),percent);
-   
-    TraIzq.setVelocity(Controller1.Axis3.position(),percent);
-
-   // DelDer.setVelocity(Controller1.Axis4.position(),percent);
-    //DelDer.spin(forward);
-    DelIzq.spin(forward);
-    DelDer.spin(forward);
-    TraIzq.spin(forward);
-    TraDer.spin(forward);
-
-
-  /*DelDer.setVelocity(Controller1.Axis4.position(), percent);
-  TraDer.setVelocity(Controller1.Axis4.position(), percent);
-  DelIzq.setVelocity(-Controller1.Axis4.position(), percent);
-  TraIzq.setVelocity(-Controller1.Axis4.position(), percent);
-  DelDer.spin(forward);
-  TraDer.spin(forward);
-  DelIzq.spin(forward);
-  TraIzq.spin(forward);*/
-}
-void derecha(){
-         //   Brain.Screen.clearScreen();
-
-    Brain.Screen.print("si");
-
-
- // Brain.Screen.print(Controller1.Axis4.position());
-  /*DelDer.setVelocity(-Controller1.Axis4.position(), percent);
-  TraDer.setVelocity(-Controller1.Axis4.position(), percent);
-  DelIzq.setVelocity(Controller1.Axis4.position(), percent);
-  TraIzq.setVelocity(Controller1.Axis4.position(), percent);
-  DelDer.spin(forward);
-  TraDer.spin(forward);
-  DelIzq.spin(forward);
-  TraIzq.spin(forward);*/
-}
 
 void apagarMotores(){
   TraIzq.stop();
@@ -118,25 +87,14 @@ void apagarMotores(){
   TraDer.stop();
 }
 
-void giros(){
-int poss = Controller1.Axis4.position();
-if (poss < 1){
-  Brain.Screen.print("si");
-}
-if(poss >1){
-  Brain.Screen.print("nO");
-}
-else{
-  apagarMotores();
-}
 
-}
 
 
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
   int velocidadBrazo = 100;
+  bool permitirAdelante = true;
   while(true){
 
    while(Controller1.ButtonR1.pressing()){
@@ -146,30 +104,24 @@ int main() {
    while(Controller1.ButtonR2.pressing()){
     bajarBrazo(velocidadBrazo);
    }
+  //Funcion para ir adelante 
+if(Controller1.Axis3.position()){
+  permitirAdelante = true;
+   funcionAdelante(permitirAdelante);
 
+}
+if(Controller1.Axis4.position()){
+   permitirAdelante = false;
+   funcionGiros(permitirAdelante);
+
+}
+   //funcion para girar
+   
    Brazo1.stop();
    Brazo2.stop();
+
   
-  /*while (Controller1.Axis4.position() > 1){
-    izquierda();
-  }*/
-  //apagarMotores();
-  /*while (Controller1.Axis4.position() < 1){
-    derecha();
-  }*/
   
-    otro();
-
-    izquierda();
-  //apagarMotores();
-
-//  adelanteAtras();
-
-   //Controller1.Axis4.changed(giros);
-   
-
-   // Controller1.Axis3.changed(adelateAtras);
-   //apagarMotores();
 
   }
 }
