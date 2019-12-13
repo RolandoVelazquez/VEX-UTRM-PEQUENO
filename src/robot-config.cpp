@@ -15,7 +15,7 @@ motor DelIzq = motor(PORT19, ratio18_1, false);
 motor Brazo1 = motor(PORT9, ratio18_1, true);
 motor Brazo2 = motor(PORT2, ratio18_1, false);
 controller Controller1 = controller(primary);
-motor Pinza = motor(PORT5, ratio18_1, false);
+motor Garra = motor(PORT5, ratio18_1, false);
 
 // VEXcode generated functions
 

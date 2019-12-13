@@ -10,7 +10,7 @@ extern motor DelIzq;
 extern motor Brazo1;
 extern motor Brazo2;
 extern controller Controller1;
-extern motor Pinza;
+extern motor Garra;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Text.
