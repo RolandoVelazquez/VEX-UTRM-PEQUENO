@@ -10,14 +10,14 @@
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
-// TraDer               motor         1
-// DelDer               motor         11
-// TraIzq               motor         10
-// DelIzq               motor         19
-// Brazo1               motor         9
-// Brazo2               motor         2
-// Controller1          controller
-// Garra                motor         5
+// TraDer               motor         1               
+// DelDer               motor         11              
+// TraIzq               motor         10              
+// DelIzq               motor         19              
+// Brazo1               motor         9               
+// Brazo2               motor         2               
+// Controller1          controller                    
+// Garra                motor         8               
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -35,6 +35,14 @@ using namespace vex;
   Con la siguiente función se asigna la velocidad que tendrá cada motor
   **todo se controla con el axis 4**
 */
+
+//Este será el modo autonomo
+void autonomo(){
+  while(true){
+
+  } 
+}
+
 void axisIzquierdo(int velocidad) {
   DelIzq.setVelocity(
       (Controller1.Axis3.position() + Controller1.Axis4.position()) / velocidad,
